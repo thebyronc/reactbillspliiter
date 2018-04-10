@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, ScrollView, TextInput, Button, Alert } from 'react-native';
+import { Text, View, ScrollView, TextInput, Button, Alert, ToastAndroid, FlatList } from 'react-native';
 import TestImport from '../testimport/TestImport';
 import Styles from '../styles/styles';
 import Person from '../model/Person';
+import PersonFlatList from '../components/PersonFlatList';
 
 export default class PeopleScreen extends React.Component {
   static navigationOptions = {
@@ -10,13 +11,14 @@ export default class PeopleScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.state = { name: '', email: '', peopleList: ['hi']};
+    this.state = { name: '', email: '', peopleList: []};
   }
 
   render() {
+    var person = new Person("Test 2", "Test@Email.com");
+    this.state.peopleList.push(person);
     return (
       <View style={Styles.container}>
-        <ScrollView style={Styles.container}>
         <Text style={Styles.headerText}>People</Text>
             <TextInput
               style={Styles.textInput}
@@ -36,21 +38,20 @@ export default class PeopleScreen extends React.Component {
               onPress={this.addPersonButton}
               title="Add Person"
             />
-
-            { this.state.peopleList.map((item, key)=>(
-              <Text key={key} style={Styles.bodyText}> { item } </Text>)
-            )}
-
+        <ScrollView style={Styles.container}>
+          <PersonFlatList peopleListFromParent={this.state.peopleList} />
         </ScrollView>
       </View>
     );
   }
 
   addPersonButton = () => {
-    var person = new Person("jo", "email");
-    this.state.peopleList.push(this.state.name);
-
-    alert(person.getName());
-
+    var person = new Person(this.state.name, this.state.email);
+    this.state.peopleList.push(person);
+    ToastAndroid.showWithGravity(
+      person.getName() + " has been added. Size of Array: " + this.state.peopleList.length,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM
+    );
   }
 }

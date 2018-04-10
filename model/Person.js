@@ -5,4 +5,7 @@ function Person(name, email) {
 Person.prototype.getName = function() {
   return this.name;
 };
+Person.prototype.getEmail = function() {
+  return this.email;
+};
 export default Person;

@@ -27,6 +27,8 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={Styles.container}>
         <ScrollView style={Styles.container} contentContainerStyle={styles.contentContainer}>
+        <Text style={Styles.headerText}>BILL FOILED</Text>
+        <Text style={Styles.bodyText}>First move to the People Tab below. Next, add each persons name that is partaking in this bill. </Text>
           <View style={styles.welcomeContainer}>
             <TextInput
               style={Styles.textInput}

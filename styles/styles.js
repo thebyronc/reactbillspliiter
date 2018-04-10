@@ -17,8 +17,7 @@ let Styles = StyleSheet.create({
     color: '#F2F2F2',
   },
   ctaButton: {
-    backgroundColor: '#4AD9D9',
-    color: '#292929',
+    color: '#4AD9D9',
   },
   textInput: {
     alignSelf: 'stretch',

@@ -18,22 +18,22 @@ export default class PersonFlatList extends React.Component {
   }
 
   getDataFromParent = () => {
-    this.state.peopleList = this.state.peopleListFromParent;
+
   };
 
   render() {
     return (
       <View style={Styles.container}>
         <FlatList
-          data={this.state.peopleList}
+          data={this.props.peopleListFromParent}
           extraData={this.state}
-          keyExtractor={this.keyExtractor}
-          renderItem={({item}) => (
-            <Text style={Styles.bodyText}>{item.getName()}</Text>
+          keyExtractor={(item, index) => index}
+          renderItem={(item) => (
+            <Text style={Styles.bodyText}>{item.name}</Text>
           )}
         />
       </View>
     );
   }
-  keyExtractor = (item, index) => item.id;
+
 }

@@ -3,7 +3,6 @@ import { Text, View, ScrollView, TextInput, Button, Alert, ToastAndroid, FlatLis
 import TestImport from '../testimport/TestImport';
 import Styles from '../styles/styles';
 import Person from '../model/Person';
-import PersonFlatList from '../components/PersonFlatList';
 
 export default class PeopleScreen extends React.Component {
   static navigationOptions = {
@@ -14,9 +13,18 @@ export default class PeopleScreen extends React.Component {
     this.state = { name: '', email: '', peopleList: []};
   }
 
-  render() {
-    var person = new Person("Test 2", "Test@Email.com");
+  addPersonButton = () => {
+    var person = new Person(this.state.name, this.state.email);
     this.state.peopleList.push(person);
+    ToastAndroid.showWithGravity(
+      person.getName() + " has been added. Size of Array: " + this.state.peopleList.length,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM
+    );
+  }
+
+  render() {
+
     return (
       <View style={Styles.container}>
         <Text style={Styles.headerText}>People</Text>
@@ -39,19 +47,16 @@ export default class PeopleScreen extends React.Component {
               title="Add Person"
             />
         <ScrollView style={Styles.container}>
-          <PersonFlatList peopleListFromParent={this.state.peopleList} />
+        <FlatList
+          data={this.state.peopleList}
+          extraData={this.state.peopleList}
+          renderItem={(item) => (
+            <Text style={Styles.bodyText}>TempStuff</Text>
+          )}
+        />
         </ScrollView>
       </View>
     );
   }
 
-  addPersonButton = () => {
-    var person = new Person(this.state.name, this.state.email);
-    this.state.peopleList.push(person);
-    ToastAndroid.showWithGravity(
-      person.getName() + " has been added. Size of Array: " + this.state.peopleList.length,
-      ToastAndroid.SHORT,
-      ToastAndroid.BOTTOM
-    );
-  }
 }

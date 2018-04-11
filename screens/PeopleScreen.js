@@ -15,7 +15,9 @@ export default class PeopleScreen extends React.Component {
 
   addPersonButton = () => {
     var person = new Person(this.state.name, this.state.email);
-    this.state.peopleList.push(person);
+    var list = this.state.peopleList.slice();
+    list.push(person);
+    this.setState({peopleList: list});
     ToastAndroid.showWithGravity(
       person.getName() + " has been added. Size of Array: " + this.state.peopleList.length,
       ToastAndroid.SHORT,
@@ -23,8 +25,9 @@ export default class PeopleScreen extends React.Component {
     );
   }
 
-  render() {
+  _keyExtractor = (item, index) => item.id;
 
+  render() {
     return (
       <View style={Styles.container}>
         <Text style={Styles.headerText}>People</Text>
@@ -50,8 +53,9 @@ export default class PeopleScreen extends React.Component {
         <FlatList
           data={this.state.peopleList}
           extraData={this.state.peopleList}
-          renderItem={(item) => (
-            <Text style={Styles.bodyText}>TempStuff</Text>
+          keyExtractor={this._keyExtractor}
+          renderItem={({item}) => (
+            <Text style={Styles.bodyText}>{item.getName()}</Text>
           )}
         />
         </ScrollView>

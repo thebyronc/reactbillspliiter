@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, ScrollView, TextInput, Button, Alert, ToastAndroid, FlatList } from 'react-native';
+import { Text, View, ScrollView, TextInput, Button, Alert, ToastAndroid, FlatList, TouchableOpacity } from 'react-native';
 import TestImport from '../testimport/TestImport';
 import Styles from '../styles/styles';
 import Person from '../model/Person';
 
 export default class PeopleScreen extends React.Component {
   static navigationOptions = {
+    header: null,
     title: 'People List',
   };
   constructor(props) {
@@ -16,7 +17,7 @@ export default class PeopleScreen extends React.Component {
   addPersonButton = () => {
     var person = new Person(this.state.name, this.state.email);
     var list = this.state.peopleList.slice();
-    list.push(person);
+    list.unshift(person);
     this.setState({peopleList: list});
     ToastAndroid.showWithGravity(
       person.getName() + " has been added. Size of Array: " + this.state.peopleList.length,
@@ -27,10 +28,13 @@ export default class PeopleScreen extends React.Component {
 
   _keyExtractor = (item, index) => item.id;
 
+
   render() {
     return (
       <View style={Styles.container}>
-        <Text style={Styles.headerText}>People</Text>
+        <View style={Styles.contentContainer}>
+        <Text style={Styles.headerText}>DINERS</Text>
+        </View>
             <TextInput
               style={Styles.textInput}
               placeholder="Name"
@@ -44,18 +48,21 @@ export default class PeopleScreen extends React.Component {
               onChangeText={(email) => this.setState({email})}
               value={this.state.email}
             />
-            <Button
-              style={Styles.ctaButton}
-              onPress={this.addPersonButton}
-              title="Add Person"
-            />
+            <TouchableOpacity onPress={this.addPersonButton}>
+              <View style={Styles.ctaButton}>
+                <Text style={Styles.ctaText}>ADD PERSON</Text>
+              </View>
+            </TouchableOpacity>
+
         <ScrollView style={Styles.container}>
         <FlatList
           data={this.state.peopleList}
           extraData={this.state.peopleList}
           keyExtractor={this._keyExtractor}
           renderItem={({item}) => (
-            <Text style={Styles.bodyText}>{item.getName()}</Text>
+            <View style={Styles.viewList}>
+              <Text style={Styles.textList}>{item.getName()} | {item.getEmail()}</Text>
+            </View>
           )}
         />
         </ScrollView>

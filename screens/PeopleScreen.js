@@ -1,5 +1,14 @@
 import React from 'react';
-import { Text, View, ScrollView, TextInput, Button, Alert, ToastAndroid, FlatList, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  Alert,
+  ToastAndroid,
+  FlatList,
+  TouchableOpacity,
+  AsyncStorage } from 'react-native';
 import TestImport from '../testimport/TestImport';
 import Styles from '../styles/styles';
 import Person from '../model/Person';
@@ -14,6 +23,14 @@ export default class PeopleScreen extends React.Component {
     this.state = { name: '', email: '', peopleList: []};
   }
 
+  componentDidMount () {
+    this._updateList();
+  }
+
+  async _updateList () {
+
+  }
+
   addPersonButton = () => {
     var person = new Person(this.state.name, this.state.email);
     var list = this.state.peopleList.slice();
@@ -24,6 +41,11 @@ export default class PeopleScreen extends React.Component {
       ToastAndroid.SHORT,
       ToastAndroid.BOTTOM
     );
+    this.addTask(this.state.peopleList);
+  }
+
+  async addTask(peopleList) {
+    await AsyncStorage.setItem('@rbs:peopleList', JSON.stringify(peopleList));
   }
 
   _keyExtractor = (item, index) => item.id;

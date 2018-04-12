@@ -1,11 +1,17 @@
-function Person(name, email) {
-  this.name = name;
-  this.email = email;
+class Person{
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
 }
-Person.prototype.getName = function() {
-  return this.name;
-};
-Person.prototype.getEmail = function() {
-  return this.email;
-};
+
 export default Person;

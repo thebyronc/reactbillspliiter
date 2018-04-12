@@ -32,7 +32,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.welcomeContainer}>
             <TextInput
               style={Styles.textInput}
-              placeholder="Enter Text"
+              placeholder="Payer"
               onChangeText={(text) => this.setState({text})}
               value={this.state.text}
             />

@@ -13,13 +13,17 @@ export default class BillScreen extends React.Component {
     this.state = { test: '', peopleList: []};
   }
   componentDidMount = () => {
-    this.updateList();
+
   }
 
   async getData() {
     let response = await AsyncStorage.getItem('@rbs:peopleList');
     let JSONresponse = await JSON.parse(response) || [];
-
+    ToastAndroid.showWithGravity(
+      response,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM
+    );
     return response;
   }
 

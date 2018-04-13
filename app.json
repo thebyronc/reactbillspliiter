@@ -1,4 +1,6 @@
 {
+  "name" : "reactbillsplit",
+  "displayName": "React Bill Split",
   "expo": {
     "name": "reactbillsplit",
     "description": "A very interesting project.",

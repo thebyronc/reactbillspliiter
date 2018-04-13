@@ -10,6 +10,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import TestScreen from '../test/TestScreen';
 import PeopleScreen from '../screens/PeopleScreen';
+import BillScreen from '../screens/BillScreen';
 
 export default TabNavigator(
   {
@@ -19,8 +20,8 @@ export default TabNavigator(
     People: {
       screen: PeopleScreen,
     },
-    Test: {
-      screen: TestScreen,
+    Bill: {
+      screen: BillScreen,
     },
   },
   {
@@ -38,7 +39,7 @@ export default TabNavigator(
           case 'People':
             iconName = Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link';
             break;
-          case 'Test':
+          case 'Bill':
             iconName =
               Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options';
         }
@@ -46,7 +47,7 @@ export default TabNavigator(
           <Ionicons
             name={iconName}
             size={28}
-            style={{ marginBottom: -3, width: 25 }}
+            style={{ marginBottom: -3, width: 25}}
             color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
           />
         );
@@ -55,6 +56,13 @@ export default TabNavigator(
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: true,
+    tabBarOptions: {
+      activeTintColor: '#fff',
+      inactiveTintColor: '#ccc',
+      style: {
+        backgroundColor: '#292929',
+      },
+    },
   }
 );

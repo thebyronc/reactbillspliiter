@@ -5,6 +5,7 @@ import Styles from '../styles/styles';
 
 export default class TestScreen extends React.Component {
   static navigationOptions = {
+    header: null,
     title: 'Test',
   };
 

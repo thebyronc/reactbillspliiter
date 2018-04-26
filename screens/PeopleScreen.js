@@ -36,16 +36,16 @@ export default class PeopleScreen extends React.Component {
     var list = this.state.peopleList.slice();
     list.unshift(person);
     this.setState({peopleList: list});
-    ToastAndroid.showWithGravity(
-      person.getName() + " has been added. Size of Array: " + this.state.peopleList.length,
-      ToastAndroid.SHORT,
-      ToastAndroid.BOTTOM
-    );
     this.addTask(this.state.peopleList);
   }
 
   async addTask(peopleList) {
     await AsyncStorage.setItem('@rbs:peopleList', JSON.stringify(peopleList));
+    ToastAndroid.showWithGravity(
+      person.getName() + " has been added. Size of Array: " + this.state.peopleList.length,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM
+    );
   }
 
   _keyExtractor = (item, index) => item.id;

@@ -39,11 +39,13 @@ export default class BillScreen extends React.Component {
           <Text style={Styles.headerText}>BILL</Text>
         </View>
         <Text>{this.state.test}</Text>
+
         <TouchableOpacity onPress={this.updateList}>
           <View style={Styles.ctaButton}>
             <Text style={Styles.ctaText}>GET TEST</Text>
           </View>
         </TouchableOpacity>
+
         <ScrollView style={Styles.container}>
         <FlatList
           data={this.state.peopleList}

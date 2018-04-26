@@ -1,0 +1,3 @@
+rootProject.name = 'reactbillsplitter'
+
+include ':app'
